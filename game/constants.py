@@ -3,28 +3,28 @@ import arcade
 # --- Настройки Экрана ---
 SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 800
-SCREEN_TITLE = "Neon Vector Pinball [Pro Edition]"
+SCREEN_TITLE = "Arcade pinball"
 
 # --- Настройки Физики (Pymunk) ---
 # Гравитация направлена вниз (по оси Y отрицательная)
 GRAVITY_X = 0
 GRAVITY_Y = -1200
 # Damping (сопротивление воздуха): 1.0 - нет сопротивления, 0.9 - сильное
-PHYSICS_DAMPING = 0.96
+PHYSICS_DAMPING = 1.0
 
 # --- Параметры Объектов ---
 BALL_RADIUS = 10
 BALL_MASS = 1.0
-BALL_FRICTION = 0.5
-BALL_ELASTICITY = 0.85  # Прыгучесть шарика
+BALL_FRICTION = 0.0
+BALL_ELASTICITY = 0.9  # Прыгучесть шарика
 
 # Параметры стен
-WALL_FRICTION = 0.5
-WALL_ELASTICITY = 0.7
+WALL_FRICTION = 0.1
+WALL_ELASTICITY = 0.8
 
 # Параметры бамперов (отбивалок)
 BUMPER_RADIUS = 14
-BUMPER_ELASTICITY = 1.5  # Сильный отскок
+BUMPER_ELASTICITY = 2.5  # Сильный отскок
 BUMPER_FRICTION = 0.6
 
 # Параметры флипперов (лапок)
@@ -63,4 +63,4 @@ TEXT_START = "START GAME"
 TEXT_EXIT = "EXIT"
 TEXT_GAME_OVER = "GAME OVER"
 TEXT_SCORE = "Score: "
-TEXT_RESTART = "Press CLICK to Restart"
+TEXT_RESTART = "Press ENTER to Restart"

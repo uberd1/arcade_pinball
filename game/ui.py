@@ -21,7 +21,6 @@ class Button(UIElement):
         self.action = action_func
         self.is_hovered = False
 
-        # В Arcade 3.0 создаем объект текста один раз
         self.text_obj = arcade.Text(
             text,
             x,
@@ -55,7 +54,6 @@ class Button(UIElement):
         # Обновляем цвет текста
         self.text_obj.color = text_color
 
-        # Новые названия функций в Arcade 3.0
         arcade.draw_rect_filled(
             arcade.rect.XYWH(self.x, self.y, self.width, self.height),
             bg_color

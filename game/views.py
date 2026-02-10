@@ -7,7 +7,7 @@ from .objects import VectorBall, VectorFlipper
 from .ui import Button, TextLabel
 from .levels import create_level_1, create_level_2
 
-# Импортируем наш физический движок
+# Импортируем физический движок
 from .physics import PymunkPhysics
 
 
@@ -86,28 +86,28 @@ class GameView(arcade.View):
         self.flipper_list.extend([self.left_flipper, self.right_flipper])
 
         # Создаем шарик
-        self.ball = VectorBall(SCREEN_WIDTH - 50, 600)
+        self.ball = VectorBall(SCREEN_WIDTH - 100, 600)
         self.ball_list.append(self.ball)
 
         # Инициализация физики
         self.physics_engine = PymunkPhysics(
             gravity=(GRAVITY_X, GRAVITY_Y),
-            damping=0.95
+            damping=PHYSICS_DAMPING
         )
 
         # 1. Добавляем стены
         self.physics_engine.add_sprite_list(
             self.wall_list,
-            friction=0.0,
-            elasticity=0.8,
+            friction=WALL_FRICTION,
+            elasticity=WALL_ELASTICITY,
             collision_type=0
         )
 
         # 2. Добавляем бамперы
         self.physics_engine.add_sprite_list(
             self.bumper_list,
-            friction=0.0,
-            elasticity=1.1,
+            friction=BUMPER_FRICTION,
+            elasticity=BUMPER_ELASTICITY,
             collision_type=2
         )
 
@@ -115,8 +115,8 @@ class GameView(arcade.View):
         self.ball_body = self.physics_engine.add_sprite(
             self.ball,
             mass=BALL_MASS,
-            friction=0.0,
-            elasticity=0.9,
+            friction=BALL_FRICTION,
+            elasticity=BALL_ELASTICITY,
             collision_type=1
         )
 
@@ -152,9 +152,8 @@ class GameView(arcade.View):
                 (self.ball.center_x, self.ball.center_y),
                 (bumper.center_x, bumper.center_y)
             )
-
-            # Порог срабатывания (примерно сумма радиусов)
-            if dist < 25 and bumper.hit_timer <= 0:
+            #Засчитываем удары от бампера
+            if dist < 30 and bumper.hit_timer <= 0:
                 bumper.hit()
                 self.score += 100
                 self.spawn_particles(self.ball.center_x, self.ball.center_y)
@@ -230,6 +229,7 @@ class GameView(arcade.View):
 
 
 class GameOverView(arcade.View):
+    #Экран Окончания игры
     def __init__(self, score):
         super().__init__()
         self.score = score
@@ -249,7 +249,9 @@ class GameOverView(arcade.View):
         self.score_text.draw()
         self.info_text.draw()
 
-    def on_mouse_press(self, x, y, button, modifiers):
-        game_view = GameView()
-        game_view.setup()
-        self.window.show_view(game_view)
+    def on_key_press(self, symbol, modifiers):
+        # Проверяем, что нажата именно клавиша Enter
+        if symbol == arcade.key.ENTER:
+            game_view = GameView()
+            game_view.setup()
+            self.window.show_view(game_view)

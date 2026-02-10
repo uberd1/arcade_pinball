@@ -48,7 +48,6 @@ class VectorWall(arcade.Sprite):
 
 
 class VectorFlipper(arcade.Sprite):
-    """Флиппер, который рисуется от точки вращения (а не из центра)."""
 
     def __init__(self, x, y, side="left"):
         super().__init__(scale=1.0)
@@ -79,7 +78,6 @@ class VectorFlipper(arcade.Sprite):
 
 
 class VectorBumper(arcade.Sprite):
-    """Классический круглый бампер с анимацией вспышки."""
 
     def __init__(self, x, y):
         super().__init__(scale=1.0)

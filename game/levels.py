@@ -1,11 +1,8 @@
 from .objects import VectorWall, VectorBumper
 from .constants import SCREEN_WIDTH, SCREEN_HEIGHT
 
+
 def create_level_1():
-    """
-    Создает объекты для первого уровня (Классический стол).
-    Возвращает кортеж (список_стен, список_бамперов).
-    """
     walls = []
     bumpers = []
 
@@ -21,7 +18,7 @@ def create_level_1():
     # Потолок (Верхняя крышка)
     walls.append(VectorWall(SCREEN_WIDTH / 2, SCREEN_HEIGHT - 10, SCREEN_WIDTH, 20))
 
-    # --- 2. Срезанные углы (для красоты и динамики) ---
+    # --- 2. Срезанные углы ---
     
     # Левый верхний угол (наклон 45 градусов)
     # x=60, y=750, w=100, h=20, angle=45
@@ -66,10 +63,8 @@ def create_level_1():
 
     return walls, bumpers
 
+
 def create_level_2():
-    """
-    Создает объекты для второго уровня (Усложненный).
-    """
     walls = []
     bumpers = []
     
