@@ -69,6 +69,10 @@ class GameView(arcade.View):
         self.score_text = arcade.Text("", 20, SCREEN_HEIGHT - 40, COLOR_TEXT_MAIN, 20)
         self.physics_engine = None
 
+        # Блок звуков
+        self.laser_sound = arcade.load_sound(":resources:sounds/laser1.wav")
+        self.flipper_sound = arcade.load_sound("data/3d pinball _ 06.wav")
+
     def setup(self):
         self.wall_list = arcade.SpriteList()
         self.bumper_list = arcade.SpriteList()
@@ -156,6 +160,7 @@ class GameView(arcade.View):
             if dist < 30 and bumper.hit_timer <= 0:
                 bumper.hit()
                 self.score += 100
+                arcade.play_sound(self.laser_sound)
                 self.spawn_particles(self.ball.center_x, self.ball.center_y)
 
                 # Физический пинок от бампера
@@ -185,6 +190,7 @@ class GameView(arcade.View):
             self.physics_engine.power_flipper(self.left_flipper_body, True, "left")
         elif key == arcade.key.RIGHT:
             self.physics_engine.power_flipper(self.right_flipper_body, True, "right")
+        arcade.play_sound(self.flipper_sound)
 
     def on_key_release(self, key, modifiers):
         if key == arcade.key.LEFT:
