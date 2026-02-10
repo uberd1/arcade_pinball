@@ -188,9 +188,11 @@ class GameView(arcade.View):
     def on_key_press(self, key, modifiers):
         if key == arcade.key.LEFT:
             self.physics_engine.power_flipper(self.left_flipper_body, True, "left")
+            arcade.play_sound(self.flipper_sound)
         elif key == arcade.key.RIGHT:
             self.physics_engine.power_flipper(self.right_flipper_body, True, "right")
-        arcade.play_sound(self.flipper_sound)
+            arcade.play_sound(self.flipper_sound)
+
 
     def on_key_release(self, key, modifiers):
         if key == arcade.key.LEFT:
